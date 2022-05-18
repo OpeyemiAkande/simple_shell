@@ -1,48 +1,46 @@
 #include "holberton.h"
+
 /**
- * execute_proc - similar to puts in C
- * @cmd: a pointer the integer we want to set to 402
+ * find_command - finds command to execute in path routes.
  *
- * Return: int
- */
-void execute_proc(char **cmd)
+ * @command: first position of getline input.
+ *
+ * Return: string of folder for command to be executed.
+ **/
+char *find_command(char *command)
 {
+	DIR *folder;
+	struct dirent *entry;
+	char *cmd, comp, **str  = malloc(sizeof(char) * 1024);
+	char **split = malloc(sizeof(char) * 1024);
+	int i;
 
-	char *parametro = (*(cmd + 1));
-	char *s, *slash = "/";
-	char *o;
-
-	char *vartoprint = *cmd;
-	char *argv[4];
-
-	if ((access(cmd[0], F_OK) == 0))
+	while (*environ != NULL)
 	{
-		argv[0] = cmd[0];
-		argv[1] = parametro;
-		argv[2] = ".";
-		argv[3] = NULL;
-
-		if (execve(argv[0], argv, NULL) == -1)
+		if (!(_strcmpdir(*environ, "PATH")))
 		{
-			perror("Error");
-		}
+			*str = *environ;
+			for (i = 0; i < 9; i++, split++, str++)
+			{
+				*split = strtok(*str, ":='PATH'");
+				folder = opendir(*split);
+				if (folder == NULL)
+				{
+					perror("Unable to read directory");
+				}
+				while ((entry = readdir(folder)))
+				{
+					cmd = entry->d_name;
+					comp = _strcmpdir(cmd, command);
+					if (comp == 0)
+					{
+						return (*split);
+					}
+					if (cmd == NULL)
+					{
+						perror("Error");
+					}}}}
+		environ++;
 	}
-	else
-	{
-		o = find_command(vartoprint);
-
-		slash = str_concat(o, slash);
-
-		s = str_concat(slash, *cmd);
-
-		argv[0] = s;
-		argv[1] = parametro;
-		argv[2] = ".";
-		argv[3] = NULL;
-
-		if (execve(argv[0], argv, NULL) == -1)
-		{
-			perror("Error");
-		}
-	}
+	return ("Error: Not Found");
 }
