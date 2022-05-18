@@ -23,7 +23,8 @@ while (*environ != NULL)
 {
 if (!(_strcmpdir(*environ, "USER")) ||
 !(_strcmpdir(*environ, "LANGUAGE")) ||
-!(_strcmpdir(*environ, "SESSION")) ||!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
+!(_strcmpdir(*environ, "SESSION")) ||
+!(_strcmpdir(*environ, "COMPIZ_CONFIG_PROFILE")) ||
 !(_strcmpdir(*environ, "SHLV")) ||
 !(_strcmpdir(*environ, "HOME")) ||
 !(_strcmpdir(*environ, "C_IS")) ||
