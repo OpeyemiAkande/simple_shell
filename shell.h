@@ -33,7 +33,7 @@
 /* _getline.c */
 ssize_t _getline(char **lineptr, size_t *n, int fd, list_t **mt);
 void reset_buffer(char *buffer, ssize_t buf_size);
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size, list_t **mt);
 char *_strdup(char *str, list_t **mt);
 unsigned int _strspn(char *s, char *accept);
 char *_strpbrk(char *s, char *accept);

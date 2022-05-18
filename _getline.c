@@ -18,8 +18,10 @@ ssize_t _getline(char **lineptr, size_t *n, int fd, list_t **mt)
 	add_node(mt, NULL, buff);
 	if (!buff)
 		return (-1);
+	
 	if (!lineptr || !n)
 		return (-1);
+
 	if (*lineptr)
 	{
 		buff = *lineptr;
@@ -31,11 +33,13 @@ ssize_t _getline(char **lineptr, size_t *n, int fd, list_t **mt)
 	}
 	reset_buffer(buff, buf_size);
 	char_read = read(fd, buff + count, char_to_read);
+	
 	if (char_read == -1)
 	{
 		free(buff);
 		return (-1);
 	}
+
 	if (char_read == 0)
 		return (-2);
 	char_read = _strlen(buff);
@@ -45,6 +49,7 @@ ssize_t _getline(char **lineptr, size_t *n, int fd, list_t **mt)
 		if (buff[count - 1] == '\n')
 			char_read = 0;
 	}
+
 	while (char_read)
-	return (count);
+		return (count);
 }
